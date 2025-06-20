@@ -14,12 +14,11 @@ export default function TabBar({ activeTab, onTabChange }: TabBarProps) {
         <button
           key={tab}
           onClick={() => onTabChange(tab)}
-          className={`px-4 py-2 text-sm md:text-base font-bold uppercase tracking-widest transition 
-            ${
-              activeTab === tab
-                ? "text-green-400 border-b-2 border-green-400"
-                : "text-green-600 hover:text-green-400"
-            }`}
+          className={`px-4 py-2 text-sm md:text-base font-dot uppercase tracking-widest transition
+            ${activeTab === tab
+              ? "text-green-400 border-b-2 border-green-400"
+              : "text-green-600 hover:text-green-400"}
+          `}
         >
           {tab}
         </button>

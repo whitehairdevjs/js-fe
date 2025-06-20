@@ -1,32 +1,27 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { Press_Start_2P } from "next/font/google";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// Google Fonts 도트 스타일 폰트 로드
+const pressStart = Press_Start_2P({
+  weight: "400",
   subsets: ["latin"],
+  display: "swap",
+  variable: "--font-press-start",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-export const metadata: Metadata = {
-  title: "js-fe",
-  description: "nextjs fe",
+export const metadata = {
+  title: "JS의 도트 블로그",
+  description: "Press Start!",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+    <html lang="ko">
+      <body className={`${pressStart.variable} font-dot bg-black text-green-400 dark:bg-white dark:text-black`}>
         {children}
       </body>
     </html>
