@@ -21,7 +21,7 @@ export default function TypingText({ text, speed = 100 }: TypingTextProps) {
   }, [index, text, speed]);
 
   return (
-    <h1 className="text-2xl md:text-3xl font-bold mb-6 whitespace-pre-wrap">
+    <h1 className="text-2xl md:text-3xl font-dot mb-6 whitespace-pre-wrap">
       {displayed}
       <span className="animate-pulse">▌</span>
     </h1>
