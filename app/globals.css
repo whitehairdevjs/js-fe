@@ -7,11 +7,16 @@
   --foreground: #171717;
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
   }
+} */
+
+.dark {
+   --background: #0a0a0a;
+   --foreground: #ededed;
 }
 
 body {
@@ -20,3 +25,58 @@ body {
   /* font-family: Arial, Helvetica, sans-serif; */
   background-image: repeating-linear-gradient(45deg, #111 0, #111 1px, #000 1px, #000 20px);
 }
+
+/* CRT 유틸리티 */
+@layer utilities {
+  .crt {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .crt::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.08),
+      rgba(0, 0, 0, 0.08) 1px,
+      transparent 1px,
+      transparent 2px
+    );
+    z-index: 10;
+    pointer-events: none;
+  }
+
+  .crt-flicker {
+    animation: flicker 1.5s infinite;
+  }
+
+  @keyframes flicker {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.85; }
+    80% { opacity: 0.9; }
+  }
+
+  .crt-shake {
+    animation: shake 0.35s infinite;
+  }
+
+  @keyframes shake {
+    0% { transform: translate(0px, 0px); }
+    25% { transform: translate(0.3px, -0.3px); }
+    50% { transform: translate(-0.3px, 0.3px); }
+    75% { transform: translate(0.3px, 0.3px); }
+    100% { transform: translate(-0.3px, -0.3px); }
+  }
+}
+
+/* 💥 모든 화면에서 가로 스크롤 금지 */
+/* @layer base {
+  html, body {
+    overflow-x: hidden;
+  }
+} */

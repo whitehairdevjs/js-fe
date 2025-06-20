@@ -2,23 +2,36 @@
 import { useEffect, useState } from "react";
 
 export default function DarkModeToggle() {
-  const [isDark, setIsDark] = useState(true);
+  const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
-    const html = document.documentElement;
-    if (isDark) {
-      html.classList.add("dark");
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark") {
+      document.documentElement.classList.add("dark");
+      setIsDark(true);
     } else {
-      html.classList.remove("dark");
+      document.documentElement.classList.remove("dark");
+      setIsDark(false);
     }
-  }, [isDark]);
+  }, []);
+
+  const toggleTheme = () => {
+    const newTheme = isDark ? "light" : "dark";
+    setIsDark(!isDark);
+    localStorage.setItem("theme", newTheme);
+    if (newTheme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  };
 
   return (
     <button
-      onClick={() => setIsDark(!isDark)}
-      className="font-dot text-xs md:text-sm px-4 py-2 border border-green-400 text-green-400 hover:bg-green-800 hover:text-white transition"
+      onClick={toggleTheme}
+      className="border px-3 py-1 rounded text-sm hover:bg-neutral-200 dark:hover:bg-neutral-800 transition"
     >
-      {isDark ? "☀ LIGHT MODE" : "🌙 DARK MODE"}
+      {isDark ? "🌞 Light" : "🌙 Dark"}
     </button>
   );
 }
