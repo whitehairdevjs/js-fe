@@ -1,29 +1,56 @@
 "use client";
+
 import { useEffect, useState } from "react";
 
 interface TypingTextProps {
-  text: string;
-  speed?: number; // 글자 하나 출력에 걸리는 시간 (ms)
+  text?: string;
+  speed?: number;
+  className?: string;
+  showCursor?: boolean;
+  onComplete?: () => void;
 }
 
-export default function TypingText({ text, speed = 100 }: TypingTextProps) {
-  const [displayed, setDisplayed] = useState("");
+export default function TypingText({
+  text = "",
+  speed = 100,
+  className = "",
+  showCursor = true,
+  onComplete,
+}: TypingTextProps) {
   const [index, setIndex] = useState(0);
+  const [done, setDone] = useState(false);
 
   useEffect(() => {
-    if (index < text.length) {
-      const timeout = setTimeout(() => {
-        setDisplayed((prev) => prev + text[index]);
-        setIndex(index + 1);
-      }, speed);
-      return () => clearTimeout(timeout);
-    }
-  }, [index, text, speed]);
+    setIndex(0);
+    setDone(false);
+    if (!text) return;
+
+    const interval = setInterval(() => {
+      setIndex((prev) => {
+        const next = prev + 1;
+        if (next >= text.length) {
+          clearInterval(interval);
+          setDone(true); // ✅ 상태 업데이트
+          setTimeout(() => onComplete?.(), 0);
+        }
+        return next;
+      });
+    }, speed);
+
+    return () => clearInterval(interval);
+  }, [text, speed]);
+
+  const visibleText = text.slice(0, index);
+  const shouldShowCursor = !done || showCursor;
 
   return (
-    <h1 className="text-2xl md:text-3xl font-dot mb-6 whitespace-pre-wrap">
-      {displayed}
-      <span className="animate-pulse">▌</span>
-    </h1>
+    <p className={`whitespace-pre-wrap font-dot ${className}`}>
+      {visibleText}
+      {shouldShowCursor && (
+        <span className="animate-pulse text-[0.8em] leading-none align-baseline">
+          ▌
+        </span>
+      )}
+    </p>
   );
 }

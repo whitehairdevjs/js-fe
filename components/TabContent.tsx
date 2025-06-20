@@ -1,17 +1,47 @@
 "use client";
 
+import { useState } from "react";
+import TypingText from "@/components/TypingText";
+
 interface TabContentProps {
   tab: string;
 }
 
 export default function TabContent({ tab }: TabContentProps) {
+  const [show2, setShow2] = useState(false);
+  const [show3, setShow3] = useState(false);
+
   const renderContent = () => {
     switch (tab) {
       case "main":
         return (
-          <div>
-            <p className="mb-2">🕹️ 여기는 메인 탭입니다.</p>
-            <p>이곳은 여러분을 JS의 세계로 초대하는 첫 화면이에요.</p>
+           <div className="flex flex-col items-center justify-center min-h-[60vh] text-center space-y-3">
+            <TypingText
+              text="Hello Everyone"
+              speed={50}
+              className="text-sm text-gray-400 dark:text-gray-700"
+              showCursor={false}
+              onComplete={() => setShow2(true)} // ← 다음 줄 표시
+            />
+
+            {show2 && (
+              <TypingText
+                text="My Name Is JS Kim."
+                speed={60}
+                className="text-3xl font-bold text-green-400 dark:text-green-700"
+                showCursor={false}
+                onComplete={() => setShow3(true)}
+              />
+            )}
+
+            {show3 && (
+              <TypingText
+                text="Welcome to the JS World"
+                speed={55}
+                className="text-xl text-green-300 dark:text-green-600"
+                showCursor={true}
+              />
+            )}
           </div>
         );
       case "myinfo":
