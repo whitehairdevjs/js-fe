@@ -16,42 +16,42 @@ export default function TabContent({ tab }: TabContentProps) {
     switch (tab) {
       case "main":
           return (
-            <div className="flex flex-col lg:flex-row items-center justify-center gap-12 px-4 min-h-[60vh]">
-              {/* 왼쪽: 텍스트 영역 */}
-              <div className="flex-1 flex flex-col items-center justify-center text-center space-y-8">
+            <div className="flex flex-col lg:flex-row items-center justify-center px-4 py-8 gap-8 lg:gap-20">
+            {/* 왼쪽 텍스트 영역 */}
+            <div className="w-full lg:w-1/2 flex flex-col items-center justify-center text-center space-y-5">
+              <TypingText
+                text="Hello Everyone"
+                speed={50}
+                className="text-base sm:text-lg text-gray-400 dark:text-gray-700"
+                showCursor={false}
+                onComplete={() => setShow2(true)}
+              />
+
+              {show2 && (
                 <TypingText
-                  text="Hello Everyone"
-                  speed={50}
-                  className="text-2xl text-gray-400 dark:text-gray-700"
+                  text="My Name Is JS Kim."
+                  speed={60}
+                  className="text-2xl sm:text-3xl lg:text-4xl font-bold text-green-400 dark:text-green-700"
                   showCursor={false}
-                  onComplete={() => setShow2(true)}
+                  onComplete={() => setShow3(true)}
                 />
+              )}
 
-                {show2 && (
-                  <TypingText
-                    text="My Name Is JS Kim."
-                    speed={60}
-                    className="text-4xl font-bold text-green-400 dark:text-green-700"
-                    showCursor={false}
-                    onComplete={() => setShow3(true)}
-                  />
-                )}
-
-                {show3 && (
-                  <TypingText
-                    text="Welcome to the JS World"
-                    speed={55}
-                    className="text-3xl text-green-300 dark:text-green-600"
-                    showCursor={true}
-                  />
-                )}
-              </div>
-
-              {/* 오른쪽: 써머리 박스 */}
-              <div className="flex-1 flex justify-center items-center scale-[1.5]">
-                <MainSummary />
-              </div>
+              {show3 && (
+                <TypingText
+                  text="Welcome to the JS World"
+                  speed={55}
+                  className="text-xl sm:text-2xl text-green-300 dark:text-green-600"
+                  showCursor={true}
+                />
+              )}
             </div>
+
+            {/* 오른쪽 Summary 박스 */}
+            <div className="w-full lg:w-1/2 flex justify-center items-center">
+              <MainSummary />
+            </div>
+          </div>
           );
       case "myinfo":
         return (
