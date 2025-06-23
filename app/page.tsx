@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import TypingText from "@/components/TypingText";
 import TabBar from "@/components/TabBar";
 import TabContent from "@/components/TabContent";
 import DarkModeToggle from "@/components/DarkModeToggle";
@@ -58,7 +57,6 @@ export default function Home() {
           <div className="flex justify-end mb-4">
             <DarkModeToggle />
           </div>
-          {/* <TypingText text="안녕하세요, 개발자 JS 입니다!" speed={100} /> */}
           <TabBar activeTab={activeTab} onTabChange={setActiveTab} />
           <TabContent key={activeTab} tab={activeTab} />
         </main>
