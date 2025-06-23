@@ -53,7 +53,7 @@ export default function Home() {
       </AnimatePresence>
 
       {started && (
-        <main className="relative min-h-screen p-6 bg-black text-green-400 dark:bg-white dark:text-black transition-colors">
+        <main className="retro-background min-h-screen p-6 text-green-400 dark:text-black transition-colors font-dot">
           <div className="flex justify-end mb-4">
             <DarkModeToggle />
           </div>
