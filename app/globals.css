@@ -2,63 +2,78 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+/* 💡 전역 컬러 변수 */
 :root {
   --background: #ffffff;
   --foreground: #171717;
 }
 
-/* @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-} */
-
 .dark {
-   --background: #0a0a0a;
-   --foreground: #ededed;
+  --background: #0a0a0a;
+  --foreground: #ededed;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  /* font-family: Arial, Helvetica, sans-serif; */
-  background-image: repeating-linear-gradient(45deg, #111 0, #111 1px, #000 1px, #000 20px);
+  font-family: 'Press Start 2P', system-ui, sans-serif;
 }
 
-/* CRT 유틸리티 */
+.retro-background {
+  background: radial-gradient(ellipse at center, #001a1a 0%, #000 100%) !important;
+  background-size: cover;
+  overflow: hidden;
+  position: relative;
+  isolation: isolate;
+  z-index: 0;
+}
+
+.retro-background::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      rgba(0, 255, 128, 0.07),
+      rgba(0, 255, 128, 0.07) 2px,
+      transparent 2px,
+      transparent 4px
+    ),
+    repeating-linear-gradient(
+      45deg,
+      rgba(0, 255, 128, 0.05),
+      rgba(0, 255, 128, 0.05) 2px,
+      transparent 2px,
+      transparent 8px
+    );
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes scan-flicker {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 0.3; }
+}
+
+@keyframes retro-glow {
+  0% { opacity: 0.03; transform: scale(1); }
+  100% { opacity: 0.08; transform: scale(1.05); }
+}
+
 @layer utilities {
   .crt {
-    position: relative;
-    overflow: hidden;
-  }
-
-  .crt::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: repeating-linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0.08),
-      rgba(0, 0, 0, 0.08) 1px,
-      transparent 1px,
-      transparent 2px
-    );
-    z-index: 10;
-    pointer-events: none;
+    text-shadow: 0 0 2px #0f0, 0 0 10px #0f0;
   }
 
   .crt-flicker {
     animation: flicker 1.5s infinite;
   }
 
-  @keyframes flicker {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.85; }
-    80% { opacity: 0.9; }
+  @keyframes crt-flicker {
+    0%, 100% { opacity: 0.02; }
+    50% { opacity: 0.05; }
   }
 
   .crt-shake {
@@ -73,10 +88,3 @@ body {
     100% { transform: translate(-0.3px, -0.3px); }
   }
 }
-
-/* 💥 모든 화면에서 가로 스크롤 금지 */
-/* @layer base {
-  html, body {
-    overflow-x: hidden;
-  }
-} */
