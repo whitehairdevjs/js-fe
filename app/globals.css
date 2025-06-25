@@ -64,7 +64,7 @@ body {
 
 @layer utilities {
   .crt {
-    text-shadow: 0 0 2px #0f0, 0 0 10px #0f0;
+    text-shadow: 0 0 1px #0f0, 0 0 4px #0f0;
   }
 
   .crt-flicker {
