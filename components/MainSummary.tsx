@@ -2,7 +2,7 @@ import { FaLaptopCode, FaHeart, FaGlobeAsia, FaEnvelope } from "react-icons/fa";
 
 export default function MainSummary() {
   return (
-    <div className="w-full max-w-sm sm:max-w-md md:max-w-lg border border-green-400 bg-black/60 backdrop-blur-sm rounded-lg p-4 sm:p-5 shadow-[0_0_20px_#00ff99] text-[#33ffcc] font-dot crt transition-all duration-300">
+    <div className="w-full max-w-sm sm:max-w-md md:max-w-lg border border-green-400 bg-black/60 backdrop-blur-sm rounded-lg p-4 sm:p-5 shadow-[0_0_5px_#00ff99] text-[#33ffcc] font-dot crt transition-all duration-300">
       {/* 타이틀 */}
       <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-4 border-b border-green-500 pb-2 tracking-wide text-green-300 text-center leading-snug break-words">
         Summary about me
@@ -32,9 +32,19 @@ export default function MainSummary() {
       </ul>
 
       {/* 하단 테두리 장식 */}
-      <div className="mt-6 border-t border-green-500 pt-2 flex items-center justify-between text-xs text-green-400">
-        <span className="w-1/3 h-2 bg-green-400 animate-pulse" />
-        <span className="w-1 h-1 bg-green-400" />
+      {/* <div className="mt-6 border-t border-green-500 pt-2 flex items-center justify-between text-xs text-green-400 relative overflow-hidden h-2">
+        <div className="absolute left-0 top-0 h-full bg-green-400 animate-gauge w-full max-w-full z-0" />
+        <span className="w-1 h-1 bg-green-400 z-10" />
+      </div> */}
+      <div className="relative w-full h-2 mt-6 border-t border-green-500 pt-2">
+        {/* 배경 트랙 */}
+        <div className="absolute top-0 left-0 w-full h-full bg-green-900/30 rounded-sm" />
+
+        {/* 게이지 바 */}
+        <div className="absolute top-0 left-0 h-full bg-green-400 rounded-sm animate-gauge z-10 shadow-[0_0_4px_#33ff99]" />
+
+        {/* 도트 or 포인트 */}
+        <span className="absolute right-1 bottom-0 w-1 h-1 bg-green-300 shadow-[0_0_2px_#33ff99]" />
       </div>
     </div>
   );
