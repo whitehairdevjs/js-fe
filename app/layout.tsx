@@ -10,7 +10,7 @@ const pressStart = Press_Start_2P({
 });
 
 export const metadata = {
-  title: "JS의 도트 블로그",
+  title: "🐖JS WORLD🐖",
   description: "Press Start!",
 };
 
