@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import TabBar from "@/components/TabBar";
 import TabContent from "@/components/TabContent";
 import DarkModeToggle from "@/components/DarkModeToggle";
+import Footer from "@/components/Footer";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function Home() {
@@ -52,15 +53,21 @@ export default function Home() {
         )}
       </AnimatePresence>
 
-      {started && (
-        <main className="retro-background min-h-screen p-6 text-green-400 dark:text-black transition-colors font-dot">
-          <div className="flex justify-end mb-4">
-            <DarkModeToggle />
-          </div>
-          <TabBar activeTab={activeTab} onTabChange={setActiveTab} />
-          <TabContent key={activeTab} tab={activeTab} />
-        </main>
-      )}
+      {started && (     
+        <div className="flex flex-col min-h-screen bg-black text-green-300">
+          <main className="flex-grow retro-background">
+            <div className="max-w-8xl mx-auto p-8">
+              <div className="flex justify-end mb-4">
+                <DarkModeToggle />
+              </div>
+              <TabBar activeTab={activeTab} onTabChange={setActiveTab} />
+              <TabContent key={activeTab} tab={activeTab} />
+            </div>
+          </main>
+
+          <Footer />
+        </div>
+      )}      
     </>
   );
 }
