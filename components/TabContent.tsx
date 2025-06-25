@@ -2,6 +2,7 @@
 
 import MyInfoTab from "@/components/MyInfoTab";
 import MainTab from "@/components/MainTab";
+import CareerTab from "@/components/CareerTab";
 
 interface TabContentProps {
   tab: string;
@@ -20,13 +21,7 @@ export default function TabContent({ tab }: TabContentProps) {
         );
       case "career":
         return (
-          <div>
-            <p className="mb-2">🧠 경력 탭입니다.</p>
-            <ul className="list-disc pl-5 space-y-1">
-              <li>2020 ~ 현재: JS Corp 백엔드 엔지니어</li>
-              <li>JAVA, SPRING 전문</li>
-            </ul>
-          </div>
+          <CareerTab />
         );
       default:
         return <p>탭을 선택해주세요.</p>;
