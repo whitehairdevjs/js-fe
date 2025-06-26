@@ -69,7 +69,7 @@ const careers = [
 
 export default function CareerTab() {
   return (
-    <div className="w-full flex flex-col items-center px-4 sm:px-6 md:px-12 py-12">
+    <div className="w-full flex flex-col items-center py-12">
       <div className="w-full max-w-6xl space-y-10">
         {careers.map((item, idx) => (
           <CRTCard key={idx} item={item} idx={idx} />
@@ -137,7 +137,7 @@ function CRTCard({ item, idx }: { item: (typeof careers)[0]; idx: number }) {
               {skill}
             </span>
           ))}
-          {item.skills.length > 9 && (
+          {item.skills.length > 6 && (
             <button
               onClick={() => setExpanded(!expanded)}
               className="text-[10px] sm:text-xs px-2 py-0.5 rounded-md border border-green-400 text-green-700 dark:text-green-300 hover:bg-green-100 dark:hover:bg-green-700/50 transition-all"
