@@ -10,7 +10,7 @@ const pressStart = Press_Start_2P({
 });
 
 export const metadata = {
-  title: "🐖JS WORLD🐖",
+  title: "JS WORLD",
   description: "Press Start!",
 };
 
