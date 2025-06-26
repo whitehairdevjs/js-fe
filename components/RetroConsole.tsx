@@ -1,10 +1,15 @@
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
 
 const commands = [
-  { prompt: "cd portfolio", delay: 0 },
-  { prompt: "run intro", delay: 1000 },
-  { prompt: "[system] Loading profile . . .", delay: 2200, isSystem: true },
+  "init dev-environment --profile=fullstack",
+  "verify toolchain --components=java,spring,db,cloud",
+  "sync repository --target=origin/main",
+  "build project --mode=production",
+  "deploy pipeline --provider=jenkins",
+  "[log] ✅ 테스트 자동화 완료",
+  "[log] ✅ 배포 완료 to AWS EC2",
+  "[system] 👨‍💻 JSKIM의 포트폴리오 시스템이 성공적으로 기동되었습니다",
+  "[notice] 💡 개발자는 코드로 세상을 바꾼다. 이제 코딩을 한번 시작해볼까요?",
 ];
 
 export default function RetroConsole() {
@@ -21,23 +26,21 @@ export default function RetroConsole() {
   useEffect(() => {
     if (currentIndex >= commands.length) return;
 
-    const { prompt, delay } = commands[currentIndex];
+    const prompt = commands[currentIndex];
+    let charIndex = 0;
 
-    // const timeout = setTimeout(() => {
-    //   let charIndex = 0;
-    //   const interval = setInterval(() => {
-    //     setTypingLine(prompt.slice(0, charIndex + 1));
-    //     charIndex++;
-    //     if (charIndex === prompt.length) {
-    //       clearInterval(interval);
-    //       setVisibleLines(lines => [...lines, prompt]);
-    //       setTypingLine("");
-    //       setCurrentIndex(idx => idx + 1);
-    //     }
-    //   }, 40);
-    // }, delay);
+    const interval = setInterval(() => {
+      setTypingLine(prompt.slice(0, charIndex + 1));
+      charIndex++;
+      if (charIndex === prompt.length) {
+        clearInterval(interval);
+        setVisibleLines(lines => [...lines, prompt]);
+        setTypingLine("");
+        setCurrentIndex(idx => idx + 1);
+      }
+    }, 30);
 
-    return () => clearTimeout(timeout);
+    return () => clearInterval(interval);
   }, [currentIndex]);
 
   return (
@@ -45,7 +48,7 @@ export default function RetroConsole() {
       {visibleLines.map((line, i) => (
         <div key={i} className="mb-1">
           <span className="text-green-300">
-            C:\\Users\\jskim{line.startsWith("[") ? "" : currentIndex > i ? ">" : ""}
+            C:\\JSWorld{line.startsWith("[") ? "" : ">"}
           </span>{" "}
           {line}
         </div>
@@ -54,10 +57,16 @@ export default function RetroConsole() {
       {typingLine && (
         <div>
           <span className="text-green-300">
-            C:\\Users\\jskim{typingLine.startsWith("[") ? "" : ">"}
+            C:\\JSWorld{typingLine.startsWith("[") ? "" : ">"}
           </span>{" "}
           {typingLine}
-          {cursorVisible && <span className="inline-block w-2 bg-green-400 ml-1 animate-pulse">&nbsp;</span>}
+        </div>
+      )}
+
+      {!typingLine && currentIndex >= commands.length && (
+        <div>
+          <span className="text-green-300">C:\JSWorld&gt;</span>
+          {cursorVisible && <span className="inline-block w-2 bg-green-400 ml-1">&nbsp;</span>}
         </div>
       )}
     </div>
