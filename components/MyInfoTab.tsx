@@ -27,7 +27,7 @@ export default function MyInfoTab() {
   const [activeTab, setActiveTab] = useState<TabKey>("자기소개");
 
   return (
-    <div className="w-full flex flex-col items-center px-4 sm:px-6 md:px-12 py-8">
+    <div className="w-full flex flex-col items-center py-8">
       <div className="w-full max-w-7xl flex flex-col md:flex-row gap-6 min-h-[400px] items-stretch">
         {/* 왼쪽 사이드 패널 */}
         <div className="w-full md:w-1/5 bg-white dark:bg-black/50 backdrop-blur-md border border-neutral-300 dark:border-green-500 rounded-lg shadow-inner dark:shadow-[0_0_5px_#00ff99] p-4 text-black dark:text-green-300 flex flex-col transition-colors duration-300">

@@ -8,7 +8,7 @@ export default function MainTab() {
   const [show3, setShow3] = useState(false);
 
   return (
-    <div className="w-full min-h-[600px] flex flex-col lg:flex-row items-center justify-center px-4 py-10 gap-12 lg:gap-20">
+    <div className="w-full min-h-[600px] flex flex-col lg:flex-row items-center justify-center py-10 gap-12 lg:gap-20">
       {/* 왼쪽 텍스트 영역 */}
       <div className="w-full lg:w-1/2 flex flex-col items-center justify-center text-center space-y-6">
         <TypingText
