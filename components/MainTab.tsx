@@ -21,7 +21,7 @@ export default function MainTab() {
 
         {show2 && (
           <TypingText
-            text="My Name Is JS Kim."
+            text="My Name Is JS Kim"
             speed={60}
             className="text-2xl sm:text-3xl lg:text-4xl font-bold text-green-600 dark:text-green-400"
             showCursor={false}

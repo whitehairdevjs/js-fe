@@ -1,4 +1,6 @@
-export const introVariants = {
+import { Variants } from "framer-motion";
+
+export const introVariants: Variants = {
   hidden: { opacity: 0, y: 12 },
   visible: (i: number) => ({
     opacity: 1,
@@ -11,7 +13,7 @@ export const introVariants = {
   }),
 };
 
-export const listVariants = {
+export const listVariants: Variants = {
   hidden: { opacity: 0, y: 10 },
   visible: (i: number) => ({
     opacity: 1,
