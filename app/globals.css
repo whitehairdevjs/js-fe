@@ -8,8 +8,8 @@
   --foreground: #0a0a0a;
 
   --retro-bg: radial-gradient(ellipse at center, #e6fff6 0%, #f5fdfd 100%);
-  --scanline-color: rgba(0, 128, 64, 0.02);
-  --scanline-diag: rgba(0, 200, 100, 0.02);
+  --scanline-color: rgba(0, 128, 64, 0.03);
+  --scanline-diag: rgba(0, 200, 100, 0.03);
 }
 
 .dark {
@@ -17,8 +17,8 @@
   --foreground: #ededed;
 
   --retro-bg: radial-gradient(ellipse at center, #001a1a 0%, #000 100%);
-  --scanline-color: rgba(0, 255, 128, 0.2);
-  --scanline-diag: rgba(0, 255, 128, 0.1);
+  --scanline-color: rgba(0, 255, 128, 0.5);
+  --scanline-diag: rgba(0, 255, 128, 0.5);
 }
 
 body {

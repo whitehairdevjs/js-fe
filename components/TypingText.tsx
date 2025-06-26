@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface TypingTextProps {
   text?: string;
@@ -20,6 +20,14 @@ export default function TypingText({
   const [index, setIndex] = useState(0);
   const [done, setDone] = useState(false);
 
+type VoidCallback = () => void;
+
+const onCompleteRef = useRef<VoidCallback | undefined>(undefined);
+
+useEffect(() => {
+  onCompleteRef.current = onComplete;
+}, [onComplete]);
+
   useEffect(() => {
     setIndex(0);
     setDone(false);
@@ -30,8 +38,9 @@ export default function TypingText({
         const next = prev + 1;
         if (next >= text.length) {
           clearInterval(interval);
-          setDone(true); // ✅ 상태 업데이트
-          setTimeout(() => onComplete?.(), 0);
+          setDone(true);
+          // ✅ 최신 onComplete 실행 (ref 통해)
+          setTimeout(() => onCompleteRef.current?.(), 0);
         }
         return next;
       });

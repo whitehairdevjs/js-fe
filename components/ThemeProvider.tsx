@@ -6,8 +6,7 @@ export default function ThemeProvider({
   children,
 }: {
   children: React.ReactNode;
-}) {
-  const [theme, setTheme] = useState<"light" | "dark">("light");
+}) {  
 
   useEffect(() => {
     const saved = localStorage.getItem("theme") as "light" | "dark" | null;
@@ -15,7 +14,6 @@ export default function ThemeProvider({
     const finalTheme = saved ?? (prefersDark ? "dark" : "light");
     document.documentElement.classList.remove("light", "dark");
     document.documentElement.classList.add(finalTheme);
-    setTheme(finalTheme);
   }, []);
 
   return <>{children}</>;

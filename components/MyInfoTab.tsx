@@ -7,15 +7,16 @@ import SkillTab from "./MyInfo/SkillTab";
 import HobbyTab from "./MyInfo/HobbyTab";
 
 const tabs = ["자기소개", "학력", "역량", "취미"];
+type TabKey = typeof tabs[number];
 
-const tabIcons = {
+const tabIcons: Record<TabKey, string> = {
   자기소개: "🙋‍♂️",
   학력: "🎓",
   역량: "🛠️",
   취미: "🎮"
 };
 
-const tabContents = {
+const tabContents: Record<TabKey, React.ReactNode> = {
   자기소개: <IntroTab />,
   학력: <EducationTab />,
   역량: <SkillTab />,
@@ -23,7 +24,7 @@ const tabContents = {
 };
 
 export default function MyInfoTab() {
-  const [activeTab, setActiveTab] = useState("자기소개");
+  const [activeTab, setActiveTab] = useState<TabKey>("자기소개");
 
   return (
     <div className="w-full flex flex-col items-center px-4 sm:px-6 md:px-12 py-8">
