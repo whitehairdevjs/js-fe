@@ -7,16 +7,20 @@ import DarkModeToggle from "@/components/DarkModeToggle";
 import Footer from "@/components/Footer";
 import { motion, AnimatePresence } from "framer-motion";
 
+const PRESS_TEXT = "PRESS START";
+const START_TEXT = "⚡ START JS WORLD";
+
 export default function Home() {
+  const [phase, setPhase] = useState<"idle" | "erasing" | "typing" | "started">("idle");
+  const [pressText, setPressText] = useState(PRESS_TEXT);
+  const [startText, setStartText] = useState("");
+
   const [activeTab, setActiveTab] = useState("main");
-  const [started, setStarted] = useState(false);
-  const [leaving, setLeaving] = useState(false);
 
   useEffect(() => {
     const handleStart = () => {
-      if (!started) {
-        setLeaving(true);
-        setTimeout(() => setStarted(true), 800); // 애니메이션 후 전환
+      if (phase === "idle") {
+        setPhase("erasing");
       }
     };
     window.addEventListener("keydown", handleStart);
@@ -25,49 +29,85 @@ export default function Home() {
       window.removeEventListener("keydown", handleStart);
       window.removeEventListener("click", handleStart);
     };
-  }, [started]);
+  }, [phase]);
+
+  useEffect(() => {
+    if (phase === "erasing" && pressText.length > 0) {
+      const timeout = setTimeout(() => {
+        setPressText((prev) => prev.slice(0, -1));
+      }, 40);
+      return () => clearTimeout(timeout);
+    } else if (phase === "erasing" && pressText.length === 0) {
+      setPhase("typing");
+    }
+  }, [phase, pressText]);
+
+  useEffect(() => {
+    if (phase === "typing" && startText.length < START_TEXT.length) {
+      const timeout = setTimeout(() => {
+        setStartText((prev) => START_TEXT.slice(0, prev.length + 1));
+      }, 40);
+      return () => clearTimeout(timeout);
+    } else if (phase === "typing" && startText.length === START_TEXT.length) {
+      setTimeout(() => setPhase("started"), 500);
+    }
+  }, [phase, startText]);
 
   return (
     <>
       <AnimatePresence>
-        {!started && (
-          <motion.div className="fixed inset-0 min-h-screen h-screen bg-black z-50 crt">
-            <div className="flex items-center justify-center w-full h-full crt-flicker crt-shake overflow-hidden">
+        {phase !== "started" && (
+          <motion.div
+            className="fixed inset-0 bg-black text-green-400 z-50 flex items-center justify-center font-dot text-1xl md:text-1xl lg:text-3xl crt"
+            initial={{ opacity: 1 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0, transition: { duration: 0.8 } }}
+          >
+            {phase === "idle" && (
               <motion.span
-                initial={{ opacity: 1, scale: 1, rotate: 0 }}
-                animate={leaving ? {
-                  opacity: 0,
-                  scale: 4,
-                  rotate: 360,
-                  y: -200,
-                  x: 100
-                } : {}}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.6, ease: "easeInOut" }}
-                className="text-green-400 font-dot text-xl md:text-2xl animate-pulse"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: [0.4, 1, 0.4] }}
+                transition={{
+                  duration: 1.2,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
               >
-                PRESS START ▌
+                {pressText} ▌
               </motion.span>
-            </div>
+            )}
+
+            {phase === "erasing" && (
+              <motion.span key="erasing" initial={{ opacity: 1 }} animate={{ opacity: 1 }}>
+                {pressText}
+              </motion.span>
+            )}
+
+            {phase === "typing" && (
+              <motion.span key="typing" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+                {startText}
+              </motion.span>
+            )}
           </motion.div>
         )}
       </AnimatePresence>
 
-      {started && (     
-        <div className="flex flex-col min-h-screen bg-black text-green-300">
+      {phase === "started" && (
+        <div className="flex flex-col min-h-screen bg-white text-black dark:bg-black dark:text-green-300 transition-colors duration-300">
           <main className="flex-grow retro-background">
             <div className="max-w-8xl mx-auto p-8">
               <div className="flex justify-end mb-4">
                 <DarkModeToggle />
               </div>
+
+              {/* ⭐ 상태 기반 탭 컨트롤 */}
               <TabBar activeTab={activeTab} onTabChange={setActiveTab} />
               <TabContent key={activeTab} tab={activeTab} />
             </div>
           </main>
-
           <Footer />
         </div>
-      )}      
+      )}
     </>
   );
 }

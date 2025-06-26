@@ -11,7 +11,7 @@ const skillItems = [
 
 export default function SkillTab() {
   return (
-    <ul className="space-y-3 text-sm sm:text-base">
+    <ul className="space-y-3 text-sm sm:text-base transition-colors duration-300">
       {skillItems.map((item, i) => (
         <motion.li
           key={i}
@@ -23,8 +23,8 @@ export default function SkillTab() {
         >
           <span className="text-lg">{item.icon}</span>
           <div>
-            <p className="text-green-300 font-semibold">{item.stack}</p>
-            <p className="text-green-200 text-sm">{item.desc}</p>
+            <p className="text-black dark:text-green-300 font-bold">{item.stack}</p>
+            <p className="text-neutral-700 dark:text-green-200 text-sm">{item.desc}</p>
           </div>
         </motion.li>
       ))}

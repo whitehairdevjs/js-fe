@@ -1,7 +1,7 @@
 import "./globals.css";
 import { Press_Start_2P } from "next/font/google";
+import ThemeProvider from "@/components/ThemeProvider"; // 추가!
 
-// Google Fonts 도트 스타일 폰트 로드
 const pressStart = Press_Start_2P({
   weight: "400",
   subsets: ["latin"],
@@ -21,8 +21,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko">
-      <body className={`${pressStart.variable} font-dot bg-black text-green-400 dark:bg-white dark:text-black`}>
-        {children}
+      <body className={`${pressStart.variable} font-dot`}>
+        <ThemeProvider>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

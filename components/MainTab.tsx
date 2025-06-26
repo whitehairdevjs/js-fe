@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 import TypingText from "@/components/TypingText";
 import MainSummary from "@/components/MainSummary";
@@ -13,7 +14,7 @@ export default function MainTab() {
         <TypingText
           text="Hello Everyone"
           speed={50}
-          className="text-base sm:text-lg text-gray-400 dark:text-gray-700"
+          className="text-base sm:text-lg text-gray-600 dark:text-gray-300"
           showCursor={false}
           onComplete={() => setShow2(true)}
         />
@@ -22,7 +23,7 @@ export default function MainTab() {
           <TypingText
             text="My Name Is JS Kim."
             speed={60}
-            className="text-2xl sm:text-3xl lg:text-4xl font-bold text-green-400 dark:text-green-700"
+            className="text-2xl sm:text-3xl lg:text-4xl font-bold text-green-600 dark:text-green-400"
             showCursor={false}
             onComplete={() => setShow3(true)}
           />
@@ -32,7 +33,7 @@ export default function MainTab() {
           <TypingText
             text="Welcome to the JS World"
             speed={55}
-            className="text-xl sm:text-2xl text-green-300 dark:text-green-600"
+            className="text-xl sm:text-2xl text-green-500 dark:text-green-300"
             showCursor={true}
           />
         )}

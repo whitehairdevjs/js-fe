@@ -92,13 +92,11 @@ function CRTCard({ item, idx }: { item: (typeof careers)[0]; idx: number }) {
       className={clsx(
         "relative overflow-hidden",
         "crt-card flex flex-col sm:flex-row items-start gap-4 sm:gap-6",
-        "bg-black/50 backdrop-blur-md border border-green-500 rounded-xl p-4 sm:p-6 shadow-[0_0_5px_#00ff99]"
+        "bg-white dark:bg-black/50 backdrop-blur-md border border-green-500 rounded-xl p-4 sm:p-6 shadow-[0_0_5px_#00ff99] text-black dark:text-green-200 transition-colors duration-300"
       )}
     >
-      {/* CRT 스캔라인 */}
       <div className="absolute inset-0 pointer-events-none z-10 mix-blend-soft-light bg-gradient-to-b from-transparent via-green-500/10 to-transparent" />
 
-      {/* 로고 */}
       <div className="w-16 h-16 min-w-[64px] flex items-center justify-center bg-white rounded-md overflow-hidden z-20">
         <Image
           src={item.logo}
@@ -109,34 +107,32 @@ function CRTCard({ item, idx }: { item: (typeof careers)[0]; idx: number }) {
         />
       </div>
 
-      {/* 내용 */}
-      <div className="flex-1 text-green-200 z-20">
+      <div className="flex-1 z-20">
         <div className="flex items-center gap-1 mb-4">
-          <span className="text-sm font-sans text-green-300">(주)</span>
-          <h3 className="text-base sm:text-2xl font-bold text-green-400 whitespace-nowrap">
+          <span className="text-sm font-sans text-green-600 dark:text-green-300">(주)</span>
+          <h3 className="text-base sm:text-2xl font-bold text-green-700 dark:text-green-400 whitespace-nowrap">
             {item.company}
           </h3>
         </div>
-        <div className="text-xs sm:text-sm mb-3 flex flex-wrap items-center gap-1 text-green-300">
+        <div className="text-xs sm:text-sm mb-3 flex flex-wrap items-center gap-1 text-neutral-600 dark:text-green-300">
           <span className="font-semibold">{item.period}</span>
-          <span className="text-green-400">|</span>
+          <span className="text-green-500">|</span>
           <span>{item.position}</span>
         </div>
-        <p className="text-xs sm:text-sm text-green-300 leading-relaxed mb-4">
+        <p className="text-xs sm:text-sm text-neutral-700 dark:text-green-300 leading-relaxed mb-4">
           {item.summary}
         </p>
-        <ul className="list-disc list-inside space-y-1 text-xs sm:text-sm mb-3">
+        <ul className="list-disc list-inside space-y-1 text-xs sm:text-sm text-neutral-700 dark:text-green-200 mb-3">
           {item.highlights.map((line, i) => (
             <li key={i}>{line}</li>
           ))}
         </ul>
 
-        {/* 기술 스택 */}
         <div className="mt-2 flex flex-wrap gap-1 sm:gap-2">
           {visibleSkills.map((skill, i) => (
             <span
               key={i}
-              className="bg-green-800 text-green-100 text-[10px] sm:text-xs px-2 py-0.5 rounded-md border border-green-400 shadow-[0_0_2px_#00ff99]"
+              className="bg-green-100 dark:bg-green-800 text-green-800 dark:text-green-100 text-[10px] sm:text-xs px-2 py-0.5 rounded-md border border-green-400 shadow-[0_0_2px_#00ff99]"
             >
               {skill}
             </span>
@@ -144,7 +140,7 @@ function CRTCard({ item, idx }: { item: (typeof careers)[0]; idx: number }) {
           {item.skills.length > 9 && (
             <button
               onClick={() => setExpanded(!expanded)}
-              className="text-[10px] sm:text-xs px-2 py-0.5 rounded-md border border-green-400 text-green-300 hover:bg-green-700/50 transition-all"
+              className="text-[10px] sm:text-xs px-2 py-0.5 rounded-md border border-green-400 text-green-700 dark:text-green-300 hover:bg-green-100 dark:hover:bg-green-700/50 transition-all"
             >
               {expanded ? "접기.." : "더보기.."}
             </button>
