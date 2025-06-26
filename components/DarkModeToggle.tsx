@@ -31,7 +31,7 @@ export default function DarkModeToggle() {
   return (
     <button
       onClick={toggleTheme}
-      className="border px-3 py-1 rounded text-sm hover:bg-neutral-200 dark:hover:bg-neutral-800 transition"
+      className="border border-black dark:border-neutral-500 px-3 py-1 rounded text-sm hover:bg-neutral-200 dark:hover:bg-neutral-800 transition"
     >
       {isDark ? "🌞 Light" : "🌙 Dark"}
     </button>
