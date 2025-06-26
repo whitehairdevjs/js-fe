@@ -12,21 +12,19 @@ export default function TabContent({ tab }: TabContentProps) {
   const renderContent = () => {
     switch (tab) {
       case "main":
-        return (
-          <MainTab />
-        );
+        return <MainTab />;
       case "myinfo":
-        return (
-          <MyInfoTab />
-        );
+        return <MyInfoTab />;
       case "career":
-        return (
-          <CareerTab />
-        );
+        return <CareerTab />;
       default:
         return <p>탭을 선택해주세요.</p>;
     }
   };
 
-  return <div className="bg-green-900/10 p-4 rounded-lg">{renderContent()}</div>;
+  return (
+    <div className="bg-neutral-100 dark:bg-green-900/10 p-4 rounded-lg shadow-sm transition-colors duration-300">
+      {renderContent()}
+    </div>
+  );
 }

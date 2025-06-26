@@ -44,10 +44,10 @@ export default function RetroConsole() {
   }, [currentIndex]);
 
   return (
-    <div className="bg-black text-green-400 font-mono text-sm p-4 mt-6 rounded-md border border-green-700 shadow-[0_0_5px_#00ff99]">
+    <div className="bg-neutral-100 dark:bg-black text-neutral-800 dark:text-green-400 font-mono text-sm p-4 mt-6 rounded-md border border-neutral-300 dark:border-green-700 shadow-md dark:shadow-[0_0_5px_#00ff99] transition-colors duration-300">
       {visibleLines.map((line, i) => (
         <div key={i} className="mb-1">
-          <span className="text-green-300">
+          <span className="text-green-600 dark:text-green-300">
             C:\\JSWorld{line.startsWith("[") ? "" : ">"}
           </span>{" "}
           {line}
@@ -56,7 +56,7 @@ export default function RetroConsole() {
 
       {typingLine && (
         <div>
-          <span className="text-green-300">
+          <span className="text-green-600 dark:text-green-300">
             C:\\JSWorld{typingLine.startsWith("[") ? "" : ">"}
           </span>{" "}
           {typingLine}
@@ -65,8 +65,10 @@ export default function RetroConsole() {
 
       {!typingLine && currentIndex >= commands.length && (
         <div>
-          <span className="text-green-300">C:\JSWorld&gt;</span>
-          {cursorVisible && <span className="inline-block w-2 bg-green-400 ml-1">&nbsp;</span>}
+          <span className="text-green-600 dark:text-green-300">C:\JSWorld&gt;</span>
+          {cursorVisible && (
+            <span className="inline-block w-2 bg-green-400 ml-1">&nbsp;</span>
+          )}
         </div>
       )}
     </div>

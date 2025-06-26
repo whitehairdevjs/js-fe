@@ -5,22 +5,31 @@
 /* 💡 전역 컬러 변수 */
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #0a0a0a;
+
+  --retro-bg: radial-gradient(ellipse at center, #e6fff6 0%, #f5fdfd 100%);
+  --scanline-color: rgba(0, 128, 64, 0.02);
+  --scanline-diag: rgba(0, 200, 100, 0.02);
 }
 
 .dark {
   --background: #0a0a0a;
   --foreground: #ededed;
+
+  --retro-bg: radial-gradient(ellipse at center, #001a1a 0%, #000 100%);
+  --scanline-color: rgba(0, 255, 128, 0.2);
+  --scanline-diag: rgba(0, 255, 128, 0.1);
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
   font-family: 'Press Start 2P', system-ui, sans-serif;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .retro-background {
-  background: radial-gradient(ellipse at center, #001a1a 0%, #000 100%) !important;
+  background: var(--retro-bg) !important;
   background-size: cover;
   overflow: hidden;
   position: relative;
@@ -35,40 +44,31 @@ body {
   background:
     repeating-linear-gradient(
       to bottom,
-      rgba(0, 255, 128, 0.07),
-      rgba(0, 255, 128, 0.07) 2px,
+      var(--scanline-color),
+      var(--scanline-color) 2px,
       transparent 2px,
       transparent 4px
     ),
     repeating-linear-gradient(
       45deg,
-      rgba(0, 255, 128, 0.05),
-      rgba(0, 255, 128, 0.05) 2px,
+      var(--scanline-diag),
+      var(--scanline-diag) 2px,
       transparent 2px,
       transparent 8px
     );
-  mix-blend-mode: overlay;
+  mix-blend-mode: multiply;
   pointer-events: none;
   z-index: 1;
 }
 
-@keyframes scan-flicker {
-  0%, 100% { opacity: 0.6; }
-  50% { opacity: 0.3; }
-}
-
-@keyframes retro-glow {
-  0% { opacity: 0.03; transform: scale(1); }
-  100% { opacity: 0.08; transform: scale(1.05); }
-}
-
+/* CRT 스타일 특화 유틸리티 */
 @layer utilities {
   .crt {
     text-shadow: 0 0 1px #0f0, 0 0 4px #0f0;
   }
 
   .crt-flicker {
-    animation: flicker 1.5s infinite;
+    animation: crt-flicker 1.5s infinite;
   }
 
   @keyframes crt-flicker {

@@ -23,8 +23,8 @@ export default function HobbyTab() {
         >
           <span className="text-lg">{hobby.icon}</span>
           <div>
-            <p className="font-semibold text-green-300">{hobby.title}</p>
-            <p className="text-green-200 text-sm">{hobby.desc}</p>
+            <p className="font-semibold text-neutral-700 dark:text-green-300 transition-colors">{hobby.title}</p>
+            <p className="text-neutral-600 dark:text-green-200 text-sm transition-colors">{hobby.desc}</p>
           </div>
         </motion.li>
       ))}

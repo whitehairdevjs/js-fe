@@ -6,12 +6,14 @@ export default function DarkModeToggle() {
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme");
-    if (savedTheme === "dark") {
-      document.documentElement.classList.add("dark");
-      setIsDark(true);
-    } else {
+
+    if (savedTheme === "light") {
       document.documentElement.classList.remove("dark");
       setIsDark(false);
+    } else {
+      // 나머지 (dark 또는 null)면 다크모드 ON
+      document.documentElement.classList.add("dark");
+      setIsDark(true);
     }
   }, []);
 
