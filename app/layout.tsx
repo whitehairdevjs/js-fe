@@ -1,6 +1,7 @@
 import "./globals.css";
 import { Press_Start_2P } from "next/font/google";
-import ThemeProvider from "@/components/ThemeProvider"; // 추가!
+import ThemeProvider from "@/components/ThemeProvider";
+import HiddenButton from "@/components/HiddenButton";
 
 const pressStart = Press_Start_2P({
   weight: "400",
@@ -24,6 +25,7 @@ export default function RootLayout({
       <body className={`${pressStart.variable} font-dot`}>
         <ThemeProvider>
           {children}
+          <HiddenButton />
         </ThemeProvider>
       </body>
     </html>
